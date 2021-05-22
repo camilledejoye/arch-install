@@ -99,7 +99,7 @@ systemctl enable reflector.timer
 systemctl enable acpid
 
 # Generate a new SSH key for the user
-su "$user" -c "ssh-keygen -t ed25519 -f '/home/$user/.ssh/ed25519' -N ''"
+su "$user" -c "ssh-keygen -t ed25519 -f '/home/$user/.ssh/id_ed25519' -N ''"
 
 # Configure the shell
 usermod -s "$(which zsh)" "$user"
