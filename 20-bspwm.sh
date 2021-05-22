@@ -66,6 +66,7 @@ git clone "$repository" \
   --recurse-submodules=zsh/oh-my-zsh/plugins/zsh-autosuggestions \
   --recurse-submodules=zsh/oh-my-zsh/plugins/zsh-syntax-highlighting \
   --recurse-submodules=zsh/oh-my-zsh/plugins/zsh-vim-mode \
+  --recurse-submodules=config/nvim/pack/packager/opt/vim-packager \
   .dotfiles
 
 # Deploy the dotfiles
