@@ -45,12 +45,16 @@ yay -S --noconfirm --needed \
   rcm-git \
   xclip \
   brightnessctl \
-  clipmenu \
   ranger w3m \
   jq \
   udiskie \
   dex \
   qutebrowser
+
+# Install separately because it requires dmenu and this will conflict with rofi-dmenu
+# This way rofi-dmenu will validate the requirements without conflicts
+# Since --noconfirm will fail if there is a conflict it stops the rest of the script otherwise
+yay -S --noconfirm --needed clipmenu
 
 # Enable lightdm
 sudo systemctl enable lightdm
