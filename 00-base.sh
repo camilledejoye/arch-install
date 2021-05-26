@@ -94,9 +94,13 @@ pacman -S --noconfirm --needed nvidia nvidia-utils nvidia-settings
 # Enable the newly installed services
 systemctl enable NetworkManager
 systemctl enable cups.service
-systemctl enable sshd
+systemctl enable sshd.service
 systemctl enable reflector.timer
 systemctl enable acpid
+
+# Open the SSH port
+iptables -t filter -A INPUT -p TCP --dport 22 -j ACCEPT
+iptables -t filter -A OUTPUT -p TCP --sport 22 -j ACCEPT
 
 # Generate a new SSH key for the user
 su "$user" -c "ssh-keygen -t ed25519 -f '/home/$user/.ssh/id_ed25519' -N ''"
