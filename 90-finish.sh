@@ -25,7 +25,7 @@ echo "rm -f public.key priate.key"
 # Install vim packages
 
 ## Needed for CoC & some providers
-yay -S --noconfirm --needed nodejs python-pynvim composer
+yay -S --noconfirm --needed nodejs python-pynvim composer yarn
 
 ## Needed for Node.js provider
 yarn global add neovim
