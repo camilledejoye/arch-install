@@ -76,17 +76,17 @@ mount /dev/sdX1 /mnt/boot
 mount /dev/sdX3 /mnt/home
 ```
 
-### Generate an fstab file
-
-```sh
-genfstab -U /mnt >> /mnt/etc/fstab
-```
-
 ### Install essential packages
 
 Install the essential packages to have a working system:
 ```sh
 pacstrap /mnt base linux linux-firmware git
+```
+
+### Generate an fstab file
+
+```sh
+genfstab -U /mnt >> /mnt/etc/fstab
 ```
 
 ### Switching to the newly installed system
