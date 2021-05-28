@@ -45,7 +45,7 @@ yay -S --noconfirm --needed \
   rcm-git \
   xclip \
   brightnessctl \
-  ranger w3m \
+  ranger w3m imagemagick\
   jq \
   udiskie \
   dex \
