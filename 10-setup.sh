@@ -107,7 +107,7 @@ fi
 step "Enable starship"
 for shell in bash zsh; do
   line="eval \"\$(starship init $shell)\""
-  grep -Fxq "$line" "/home/$user/.${shell}rc" || echo "$line" >> "/home/$user/.${shell}rc"
+  grep -Fxq "$line" "/home/$user/.${shell}rc" 2>/dev/null || echo "$line" >> "/home/$user/.${shell}rc"
 done
 
 # }}}
