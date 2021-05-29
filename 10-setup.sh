@@ -85,7 +85,7 @@ if [ ! -f "/home/$user/.ssh/id_ed25519" ]; then
   step "Generate an SSH key for ${yellow}$user${end}"
 
   cmd="ssh-keygen -t ed25519 -f '/home/$user/.ssh/id_ed25519'"
-  [ ! -z "$passphrase" ] cmd="$cmd -N '$passphrase'"
+  [ ! -z "$passphrase" ] && cmd="$cmd -N '$passphrase'"
 
   if [ "$(id -u --name)" = "$user" ]; then
     eval "$cmd"
@@ -105,7 +105,7 @@ if [ $(which zsh) != "$user_shell" ]; then
 fi
 
 step "Enable starship"
-for shell in "bash\nzsh"; do
+for shell in bash zsh; do
   line="eval \"\$(starship init $shell)\""
   grep -Fxq "$line" "/home/$user/.${shell}rc" || echo "$line" >> "/home/$user/.${shell}rc"
 done
