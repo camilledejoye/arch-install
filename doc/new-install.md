@@ -71,8 +71,8 @@ swapon /dev/sdX4
 We need to mount our new file system in order to install Arch on it:
 ```sh
 mount /dev/sdX2 /mnt
-mkdir /mnt/boot /mnt/home
-mount /dev/sdX1 /mnt/boot
+mkdir -p /mnt/boot/efi /mnt/home
+mount /dev/sdX1 /mnt/boot/efi
 mount /dev/sdX3 /mnt/home
 ```
 
@@ -111,7 +111,7 @@ If this is to run the system in VirtualBox, uncomment the following lines:
 
 Install your base system and create your user with:
 ```
-./arch-install/00-base.sh
+./arch-install/00-install.sh
 ```
 
 Follow the instructions to reboot, login with your username & password.
