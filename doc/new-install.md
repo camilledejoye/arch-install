@@ -117,11 +117,7 @@ Install your base system and create your user with:
 Follow the instructions to reboot, login with your username & password.
 Continue the installation with:
 ```sh
-./arch-instal/20-bspwm.sh
+./arch-instal/10-setup.sh
 ```
 
-To finalize the installation: reboot, register the SSH key into GitHub
-and launch the last script:
-```sh
-./arch-install/90-finish.sh
-```
+Finally reboot to access the choosen graphical environment.

@@ -13,16 +13,28 @@ readonly purple="\e[35m"
 readonly lightblue="\e[36m"
 readonly end="\e[0m"
 
-step() {
+step() { # {{{
   echo; echo -e "${bold}${blue}>${end} ${bold}${yellow}$1${end}"
-}
+} # }}}
 
-error() {
-  echo -e "${bold}${red}$1${end}" >2
-}
+error() { # {{{
+  if read -t 0; then # Try to read the standard input if possible
+    msg="$(cat -)"
+  elif [ 1 -lt $# ]; then
+    msg="$@"
+  fi
 
-quit() {
-  error "$1"; exit 1
-}
+  echo -e "${bold}${red}$msg${end}" 1>&2
+} # }}}
+
+quit() { # {{{
+  error "$@"; exit 1
+} # }}}
+
+assert-no-root() { # {{{
+  if [ "root" = "$(id --user --name)" ]; then
+    quit "This script is not meant to be run as ${yellow}root${end}"
+  fi
+} # }}}
 
 # vim: ts=2 sw=2 et fdm=marker

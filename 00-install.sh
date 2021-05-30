@@ -10,8 +10,6 @@ readonly current_dir="$( cd "$( dirname "$0" )" ; pwd -P )"
 ## Define variables & read arguments {{{
 
 user="cdejoye"
-hostname=""
-skip_mirrors=0
 
 while [ -n "${1-}" ]; do
   case "$1" in
@@ -20,32 +18,13 @@ while [ -n "${1-}" ]; do
 
     -h|--hostname)
       hostname="$2"; shift;;
-
-    -p|--passphrase)
-      passphrase="$2"; shift;;
-
-    --skip-mirrors)
-      skip_mirrors=1 ;;
   esac
 
   shift
 done
 
 ## Default value if not provided
-[ -z "$hostname" ] && hostname="$user-arch"
-
-## Ask for the SSH passphrase if not provided
-if [ -z "$passphrase" ]; then
-  step "Setup SSH information"
-  echo -n "Enter a passphrase for the user's SSH key:"
-  while [ -z "$passphrase" ]; do
-    echo
-    echo -n "Passphrase: "
-    stty -echo
-    read passphrase
-    stty echo
-  done
-fi
+hostname="${hostname:-$user-arch}"
 
 # }}}
 
@@ -108,29 +87,24 @@ echo "127.0.1.1 $hostname.local $hostname" >> /etc/hosts
 # Bootloader {{{
 
 step "Set up the bootloader"
-pacman -S --noconfirm --needed grub efibootmgr
+pacman -S --noconfirm --needed grub efibootmgr os-prober intel-ucode
 grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=GRUB
 grub-mkconfig -o /boot/grub/grub.cfg
 
 # }}}
 
-# Install Yay {{{
+# Install host specific packages {{{
 
-step "Install Yay"
+# Disable if not using a nvidia cards
+# Disabled by default during tests in VMs
+# pacman -S --noconfirm --needed nvidia nvidia-utils nvidia-settings
 
-pacman -S --noconfirm --needed base-devel
-
-# Install as the main user since makepkg is blocked as root
-su "$user" <<'EOF'
-git clone https://aur.archlinux.org/yay.git /tmp/yay
-cd /tmp/yay
-makepkg --noconfirm --syncdeps --install
-EOF
+# Enable if in a virtualbox VM
+# Enabled by default during tests in VMs
+pacman -S --noconfirm --needed virtualbox-guest-utils
+systelctm enable vboxservice.service
 
 # }}}
-
-# Setup the system
-. "$current_dir/10-setup.sh"
 
 step "Moving installation scripts to ${blue}/home/$user/arch-install${end}"
 mv arch-install "/home/$user"

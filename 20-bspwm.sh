@@ -1,30 +1,21 @@
 #!/bin/bash
 
-# Variables {{{
+# Load the helper if not already loaded (when including in another script)
+if ! type 'quit' >/dev/null 2>&1; then
+  readonly current_dir="$( cd "$( dirname "$0" )" ; pwd -P )"
+  . "$current_dir/lib.sh"
+fi
 
-repository="https://github.com/camilledejoye/dotfiles"
-
-# }}}
-
-# Install an AUR helper {{{
-
-## Install dependencies to build yay
-sudo pacman -S --noconfirm --needed base-devel
-
-## Build yay & cleanup
-git clone https://aur.archlinux.org/yay.git /tmp/yay
-cd /tmp/yay
-makepkg --cleanbuild --syncdeps --install --noconfirm
-cd /tmp
-rm -fr yay
-
-# }}}
+assert-not-root
 
 # Install packages {{{
+
+step "Install packages"
 
 ## General packages {{{
 
 yay -S --noconfirm --needed \
+  xf86-video-intel \
   xorg \
   lightdm \
   lightdm-gtk-greeter \
@@ -90,51 +81,88 @@ yay -S --noconfirm --needed \
 
 # }}}
 
-# Configuration {{{
+# Install dictionaries for qutebrowser {{{
 
-## Install dictionaries for qutebrowser
+step "Install qutebrowser dictionaries"
 /usr/share/qutebrowser/scripts/dictcli.py install fr-FR en-US
 
-## Setup X11 keyboard layout (needed for lightdm)
+# }}}
+
+# Setup X11 keyboard layout (needed for lightdm) {{{
+step "Setup X11 keyboard layout"
 localectl --no-convert set-x11-keymap fr oss terminate:ctrl_alt_bksp,grp:ctrl_rshift_toggle,caps:escape
 
-## Dotfiles {{{
+# }}}
 
-### Clone the dotfiles repository
-### Pull only the submodules I'll need
-git clone "$repository" \
-  -b rcm \
-  --recurse-submodules=oh-my-zsh \
-  --recurse-submodules=zsh/oh-my-zsh/plugins/zsh-autosuggestions \
-  --recurse-submodules=zsh/oh-my-zsh/plugins/zsh-syntax-highlighting \
-  --recurse-submodules=zsh/oh-my-zsh/plugins/zsh-vim-mode \
-  --recurse-submodules=config/nvim/pack/packager/opt/vim-packager \
-  .dotfiles
+# Deploy the dotfiles {{{
 
-### Deploy the dotfiles
-echo "Deploying the dotfiles..."
-# Force the deployement since it's a fresh install
-# Don't deploy the vim configuration right now because the plugins require acces to my github
-rcup -f -x config/nvim/
-echo "Dotfiles deployed."
+dotfiles_dir="$HOME/.dotfiles"
+
+if [ ! -d "$dotfiles_dir" ]; then
+  step "Setup the dotfiles"
+
+  # Pull only the submodules I'll need
+  git clone git@github.com:camilledejoye/dotfiles \
+    -b rcm \
+    --recurse-submodules=oh-my-zsh \
+    --recurse-submodules=zsh/oh-my-zsh/plugins/zsh-autosuggestions \
+    --recurse-submodules=zsh/oh-my-zsh/plugins/zsh-syntax-highlighting \
+    --recurse-submodules=zsh/oh-my-zsh/plugins/zsh-vim-mode \
+    --recurse-submodules=config/nvim/pack/packager/opt/vim-packager \
+    "$dotfiles_dir"
+
+  step "Deploying the dotfiles..."
+  # Force the deployement since it's a fresh install
+  rcup -f
+else
+  step "Deploying the dotfiles..."
+  rcup
+fi
 
 ## }}}
 
 ## Enable services {{{
 
+step "Enable lightdm & the SSH agent"
 sudo systemctl enable lightdm
 systemctl --user enabe ssh-agent.service
 
 ## }}}
 
+# Deploy base16 themes {{{
+
+## Install my fork of base16-manager
+git clone git@github.com:base16-manager /tmp/base16-manager
+cd /tmp/base16-manager
+sudo make install
+
+## Install the themes needed
+base16-manager install theova/base16-qutebrowser
+base16-manager install nicodebo/base16-fzf
+base16-manager install khamer/base16-dunst
+base16-manager install chriskempson/base16-xresources
+base16-manager install chriskempson/base16-vim
+# Not sure yet for rofi because I think my theme is based on the colors but not the look
+# base16-manager install 0xdec/base16-rofi
+
+## Setup the theme
+base16-manager set tomorrow-night
+
 # }}}
 
-echo -e "\e[1;34m"
-echo "The second part of the installation is over"
-echo -e "\e[0m"
-echo "To continue the installation reboot, login with LightDM"
-echo "  and run the last installation script"
+# Setup the password store {{{
+
+step "Setup the password store"
+yay -S --noconfirm --needed pass
+git clone git@github.com:camilledejoye/password-store "$HOME/.password-store"
+
+# }}}
+
+echo -e "${bold}${green}The second part of the installation is over${end}"
 echo
-echo "$ systemctl reboot"
+echo "To use the password-store, first import the private & public keys !"
+echo "$ gpp --import public.key private.key"
+echo "$ gpg --edit-key {ID} trust quit"
+echo "$ rm -f public.key priate.key"
 
 # vim: ts=2 sw=2 et fdm=marker
