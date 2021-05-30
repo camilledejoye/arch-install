@@ -138,6 +138,7 @@ sed -i "/^$user.*pacman$/d" "/etc/sudoers.d/$user"
 
 step "Moving installation scripts to ${yellow}/home/$user/arch-install${end}"
 mv arch-install "/home/$user"
+chown -R cdejoye. "/home/$user/arch-install"
 
 echo -e "${bold}${green}The first part of the installation is over${end}"
 echo "To continue the installation exit the system, unmount your filesytem and reboot"
