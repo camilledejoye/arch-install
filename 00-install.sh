@@ -112,6 +112,27 @@ grub-mkconfig -o /boot/grub/grub.cfg
 
 # }}}
 
+# Install Yay {{{
+
+step "Install Yay"
+
+pacman -S --noconfirm --needed base-devel
+
+# Grant permission run makepkg without having to type a password
+echo "$user ALL=(root) NOPASSWD: /usr/bin/pacman" >> "/etc/sudoers.d/$user"
+
+# Install as the main user since makepkg is blocked as root
+su "$user" <<'EOF'
+git clone https://aur.archlinux.org/yay.git /tmp/yay
+cd /tmp/yay
+makepkg --noconfirm --syncdeps --install
+EOF
+
+# Remove the extra permission
+sed -i "/^$user.*pacman$/d" "/etc/sudoers.d/$user"
+
+# }}}
+
 # Setup the system
 . "$current_dir/10-setup.sh"
 
