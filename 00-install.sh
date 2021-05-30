@@ -50,12 +50,12 @@ fi
 # }}}
 
 # Set the root password
-step "Set the password for the ${yellow}root${end} user:"
+step "Set the password for the ${blue}root${yellow} user:"
 passwd; echo
 
 # Create the main user {{{
 
-step "Create the user ${yellow}$use${end}"
+step "Create the user ${blue}$use${end}"
 if id "$user" >/dev/null 2>&1; then
   echo -e "The user already exists."
 else
@@ -95,7 +95,7 @@ fi
 
 # Network {{{
 
-step "Set up the hostname & updating ${yellow}/etc/hosts${end}"
+step "Set up the hostname & updating ${blue}/etc/hosts${end}"
 echo "$hostname" > /etc/hostname
 echo "127.0.0.1 localhost" >> /etc/hosts
 echo "::1       localhost" >> /etc/hosts
@@ -136,7 +136,7 @@ sed -i "/^$user.*pacman$/d" "/etc/sudoers.d/$user"
 # Setup the system
 . "$current_dir/10-setup.sh"
 
-step "Moving installation scripts to ${yellow}/home/$user/arch-install${end}"
+step "Moving installation scripts to ${blue}/home/$user/arch-install${end}"
 mv arch-install "/home/$user"
 chown -R cdejoye. "/home/$user/arch-install"
 
