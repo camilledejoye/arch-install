@@ -64,6 +64,8 @@ else
   passwd "$user"
   pacman -S --noconfirm --needed sudo
   echo "$user ALL=(ALL) ALL" > "/etc/sudoers.d/$user"
+  # Grants sudo privilege as root to $user without having to type a password for 2 hours
+  echo "$user ALL=(root) 'NOTAFTER=$(date --utc -d "+2 hours" +%Y%m%d%H%MZ)' NOPASSWD: ALL"
 fi
 
 # }}}
@@ -118,18 +120,12 @@ step "Install Yay"
 
 pacman -S --noconfirm --needed base-devel
 
-# Grant permission run makepkg without having to type a password
-echo "$user ALL=(root) NOPASSWD: /usr/bin/pacman" >> "/etc/sudoers.d/$user"
-
 # Install as the main user since makepkg is blocked as root
 su "$user" <<'EOF'
 git clone https://aur.archlinux.org/yay.git /tmp/yay
 cd /tmp/yay
 makepkg --noconfirm --syncdeps --install
 EOF
-
-# Remove the extra permission
-sed -i "/^$user.*pacman$/d" "/etc/sudoers.d/$user"
 
 # }}}
 
@@ -140,6 +136,7 @@ step "Moving installation scripts to ${blue}/home/$user/arch-install${end}"
 mv arch-install "/home/$user"
 chown -R cdejoye. "/home/$user/arch-install"
 
+echo
 echo -e "${bold}${green}The first part of the installation is over${end}"
 echo "To continue the installation exit the system, unmount your filesytem and reboot"
 echo
