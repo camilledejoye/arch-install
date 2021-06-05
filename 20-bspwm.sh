@@ -121,13 +121,13 @@ fi
 
 ## }}}
 
-## Enable services {{{
+# Enable services {{{
 
 step "Enable lightdm & the SSH agent"
 sudo systemctl enable lightdm
 systemctl --user enable ssh-agent.service
 
-## }}}
+# }}}
 
 # Deploy base16 themes {{{
 
@@ -174,11 +174,10 @@ yay -S --noconfirm --needed nodejs python-pynvim composer yarn
 ## Needed for Node.js provider
 yarn global add neovim
 
-echo "Installing packages, it might take a while..."
+step "Installing packages..."
 nvim -c PackInstall -c qa >/dev/null 2>&1
 
 # }}}
-
 
 echo -e "${bold}${green}The final part of the installation is over${end}"
 echo
