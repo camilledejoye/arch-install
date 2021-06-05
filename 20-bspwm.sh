@@ -133,6 +133,8 @@ systemctl --user enable ssh-agent.service
 
 if ! command -v base16-manager >/dev/null 2>&1; then
 
+  step "Deploy base16 theme"
+
   ## Install my fork of base16-manager
   git clone https://github.com/camilledejoye/base16-manager /tmp/base16-manager
   cd /tmp/base16-manager
