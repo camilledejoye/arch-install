@@ -42,9 +42,9 @@ else
   echo -e "User created."
   passwd "$user"
   pacman -S --noconfirm --needed sudo
-  echo "$user ALL=(ALL) ALL" > "/etc/sudoers.d/$user"
+  echo "$user ALL=(ALL) ALL" >> "/etc/sudoers.d/$user"
   # Grants sudo privilege as root to $user without having to type a password for 2 hours
-  echo "$user ALL=(root) 'NOTAFTER=$(date --utc -d "+2 hours" +%Y%m%d%H%MZ)' NOPASSWD: ALL"
+  echo "$user ALL=(root) NOTAFTER=$(date --utc -d "+2 hours" +%Y%m%d%H%MZ) NOPASSWD: ALL" >> "/etc/sudoers.d/$user"
 fi
 
 # }}}
