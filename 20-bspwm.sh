@@ -155,17 +155,6 @@ fi
 
 # }}}
 
-# Setup the password store {{{
-
-if [ ! -d "$HOME/.password-store" ]; then
-  step "Setup the password store"
-  yay -S --noconfirm --needed pass
-  git clone https://github.com/camilledejoye/password-store "$HOME/.password-store"
-  git -C "$HOME/.password-store" remote set-url origin git@github.com:camilledejoye/password-store
-fi
-
-# }}}
-
 # Install vim packages {{{
 
 step "Configure NeoVim"
@@ -181,11 +170,7 @@ nvim -c PackInstall -c qa >/dev/null 2>&1
 
 # }}}
 
-echo -e "${bold}${green}The final part of the installation is over${end}"
 echo
-echo "To use the password-store, first import the private & public keys !"
-echo "$ gpp --import public.key private.key"
-echo "$ gpg --edit-key {ID} trust quit"
-echo "$ rm -f public.key priate.key"
+echo -e "${bold}${green}The final part of the installation is over${end}"
 
 # vim: ts=2 sw=2 et fdm=marker
