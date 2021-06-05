@@ -26,6 +26,7 @@ yay -S --noconfirm --needed \
   bspwm \
   sxhkd \
   polybar \
+  pa-applet-git \
   dunst \
   vlc \
   alacritty \
