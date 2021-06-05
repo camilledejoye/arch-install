@@ -31,7 +31,7 @@ quit() { # {{{
   error "$@"; exit 1
 } # }}}
 
-assert-no-root() { # {{{
+assert-not-root() { # {{{
   if [ "root" = "$(id --user --name)" ]; then
     quit "This script is not meant to be run as ${yellow}root${end}"
   fi
