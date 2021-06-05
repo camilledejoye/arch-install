@@ -106,7 +106,7 @@ git clone https://github.com/camilledejoye/arch-install
 If this is to run the system in VirtualBox, uncomment the following lines:
 ```sh
 # pacman -S --noconfirm --needed virtualbox-guest-utils
-# systelctm enable vboxservice.service
+# systemctl enable vboxservice.service
 ```
 
 Install your base system and create your user with:

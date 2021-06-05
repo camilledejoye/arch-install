@@ -154,7 +154,7 @@ sudo pacman -S --noconfirm --needed \
 # Enable if in a virtualbox VM
 # Enabled by default during tests in VMs
 pacman -S --noconfirm --needed virtualbox-guest-utils
-systelctm enable vboxservice.service
+systemctl enable vboxservice.service
 
 # }}}
 
