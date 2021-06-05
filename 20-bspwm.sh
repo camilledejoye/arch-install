@@ -96,20 +96,20 @@ localectl --no-convert set-x11-keymap fr oss terminate:ctrl_alt_bksp,grp:ctrl_rs
 
 # Deploy the dotfiles {{{
 
-dotfiles_dir="$HOME/.dotfiles"
-
-if [ ! -d "$dotfiles_dir" ]; then
+if [ ! -d "$HOME/.dotfiles" ]; then
   step "Setup the dotfiles"
 
   # Pull only the submodules I'll need
-  git clone git@github.com:camilledejoye/dotfiles \
+  git clone https://github.com/camilledejoye/dotfiles \
     -b rcm \
     --recurse-submodules=oh-my-zsh \
     --recurse-submodules=zsh/oh-my-zsh/plugins/zsh-autosuggestions \
     --recurse-submodules=zsh/oh-my-zsh/plugins/zsh-syntax-highlighting \
     --recurse-submodules=zsh/oh-my-zsh/plugins/zsh-vim-mode \
     --recurse-submodules=config/nvim/pack/packager/opt/vim-packager \
-    "$dotfiles_dir"
+    "$HOME/.dotfiles"
+
+  git -C "$HOME/.dotfiles" remote set-url origin git@github.com:camilledejoye/dotfiles
 
   step "Deploying the dotfiles..."
   # Force the deployement since it's a fresh install
@@ -155,7 +155,8 @@ base16-manager set tomorrow-night
 if [ ! -d "$HOME/.password-store" ]; then
   step "Setup the password store"
   yay -S --noconfirm --needed pass
-  git clone git@github.com:camilledejoye/password-store "$HOME/.password-store"
+  git clone https://github.com/camilledejoye/password-store "$HOME/.password-store"
+  git -C "$HOME/.password-store" remote set-url origin git@github.com:camilledejoye/password-store
 fi
 
 # }}}
@@ -175,7 +176,8 @@ nvim -c PackInstall -c qa >/dev/null 2>&1
 
 # }}}
 
-echo -e "${bold}${green}The second part of the installation is over${end}"
+
+echo -e "${bold}${green}The final part of the installation is over${end}"
 echo
 echo "To use the password-store, first import the private & public keys !"
 echo "$ gpp --import public.key private.key"
