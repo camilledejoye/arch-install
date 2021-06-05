@@ -70,7 +70,7 @@ yay -S --noconfirm --needed \
 yay -S --noconfirm --needed \
   ttf-dejavu \
   ttf-droid \
-  nerd-fonts-hack \
+  ttf-hack \
   ttf-font-awesome \
   ttf-ms-fonts \
   ttf-roboto \
