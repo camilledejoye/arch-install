@@ -125,7 +125,7 @@ fi
 
 step "Enable lightdm & the SSH agent"
 sudo systemctl enable lightdm
-systemctl --user enabe ssh-agent.service
+systemctl --user enable ssh-agent.service
 
 ## }}}
 
