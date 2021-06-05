@@ -90,7 +90,7 @@ step "Install qutebrowser dictionaries"
 
 # Setup X11 keyboard layout (needed for lightdm) {{{
 step "Setup X11 keyboard layout"
-localectl --no-convert set-x11-keymap fr oss terminate:ctrl_alt_bksp,grp:ctrl_rshift_toggle,caps:escape
+sudo localectl --no-convert set-x11-keymap fr oss terminate:ctrl_alt_bksp,grp:ctrl_rshift_toggle,caps:escape
 
 # }}}
 
