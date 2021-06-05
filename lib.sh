@@ -37,4 +37,11 @@ assert-no-root() { # {{{
   fi
 } # }}}
 
+add-line-to-file() { # {{{
+  readonly line="$1"
+  readonly file="$2"
+
+  grep -Fxq "$line" "$file" 2>/dev/null || echo "$line" | sudo tee -a "$file" >/dev/null
+} # }}}
+
 # vim: ts=2 sw=2 et fdm=marker

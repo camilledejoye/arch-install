@@ -82,6 +82,23 @@ yay -S --noconfirm --needed \
 
 # }}}
 
+# Configure LightDM {{{
+
+step "Configure LightDM"
+
+sudo sed -i \
+  -e 's/^#\(background\)=$/\1=#1d1f21/' \
+  -e 's/^#\(theme-name\)=$/\1=Arc-Dark/' \
+  -e 's/^#\(icon-theme-name\)=$/\1=Arc/' \
+  -e 's/^#\(indicators\)=$/\1=~spacer;~clock;~spacer;~power/' \
+  -e 's/^#\(clock-format\)=$/\1=%A %d %H:%M/' \
+  -e 's/^#\(font-name\)=$/\1=Noto Sans/' \
+  /etc/lightdm/lightdm-gtk-greeter.conf
+
+add-line-to-file "cursor-theme-name=Bibata-Modern-Ice" "/etc/lightdm/lightdm-gtk-greeter.conf"
+
+# }}}
+
 # Install dictionaries for qutebrowser {{{
 
 step "Install qutebrowser dictionaries"
