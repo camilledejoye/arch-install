@@ -160,6 +160,21 @@ fi
 
 # }}}
 
+# Install vim packages {{{
+
+step "Configure NeoVim"
+
+## Needed for CoC & some providers
+yay -S --noconfirm --needed nodejs python-pynvim composer yarn
+
+## Needed for Node.js provider
+yarn global add neovim
+
+echo "Installing packages, it might take a while..."
+nvim -c PackInstall -c qa >/dev/null 2>&1
+
+# }}}
+
 echo -e "${bold}${green}The second part of the installation is over${end}"
 echo
 echo "To use the password-store, first import the private & public keys !"
