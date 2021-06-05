@@ -83,7 +83,7 @@ if [ ! -z "${github_token:-}" ]; then
     -H "Accept: application/vnd.github.v3+json" \
     -X POST https://api.github.com/user/keys \
     --write-out "%{http_code}\n" \
-    --silent --output /dev/null
+    --silent --output /dev/null \
     --data-binary @-  <<EOF
 {
   "title":"$(hostname) - test",
