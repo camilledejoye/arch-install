@@ -100,7 +100,7 @@ fi
 
 if [ $(which zsh) != "${SHELL:-}" ]; then
   step "Define ${blue}zsh${yellow} as default shell for ${blue}$USER${yellow}"
-  sudo usersmod -s "$(which zsh)" "$USER"
+  sudo usermod -s "$(which zsh)" "$USER"
 fi
 
 if [ -z "${STARSHIP_SHELL:-}" ]; then
