@@ -53,14 +53,16 @@ done
 
 # Install Yay {{{
 
-step "Install Yay"
+if ! command -v yay >/dev/null 2>&1; then
+  step "Install Yay"
 
-sudo pacman -S --noconfirm --needed base-devel
+  sudo pacman -S --noconfirm --needed base-devel
 
-# Install as the main user since makepkg is blocked as root
-git clone https://aur.archlinux.org/yay.git /tmp/yay
-cd /tmp/yay
-makepkg --noconfirm --syncdeps --install
+  # Install as the main user since makepkg is blocked as root
+  git clone https://aur.archlinux.org/yay.git /tmp/yay
+  cd /tmp/yay
+  makepkg --noconfirm --syncdeps --install
+fi
 
 # }}}
 
