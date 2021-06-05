@@ -10,6 +10,7 @@ readonly current_dir="$( cd "$( dirname "$0" )" ; pwd -P )"
 ## Define variables & read arguments {{{
 
 user="cdejoye"
+skip_mirrors=0
 
 while [ -n "${1-}" ]; do
   case "$1" in
@@ -18,6 +19,9 @@ while [ -n "${1-}" ]; do
 
     -h|--hostname)
       hostname="$2"; shift;;
+
+    --skip-mirrors)
+      skip_mirrors=1 ;;
   esac
 
   shift
@@ -93,7 +97,55 @@ grub-mkconfig -o /boot/grub/grub.cfg
 
 # }}}
 
-# Install host specific packages {{{
+# Install packages {{{
+
+## Update mirrors
+sudo pacman -S --noconfirm --needed rsync reflector
+if [ 0 -eq $skip_mirrors ]; then
+  step "Update the mirrors..."
+  sudo reflector -c "$country" -l 200 --sort rate --save /etc/pacman.d/mirrorlist
+fi
+
+step "Install default packages"
+sudo pacman -S --noconfirm --needed \
+  man-db \
+  man-pages \
+  mlocate \
+  pacman-contrib \
+  zsh \
+  starship \
+  bat \
+  fzf \
+  ripgrep \
+  neovim \
+  htop \
+  usbutils \
+  wget \
+  networkmanager \
+  network-manager-applet \
+  wpa_supplicant \
+  net-tools \
+  inetutils \
+  dnsutils \
+  bridge-utils \
+  dnsmasq \
+  iptables \
+  gnupg \
+  dialog \
+  cups \
+  hplip \
+  alsa-utils \
+  pulseaudio \
+  pulseaudio-alsa \
+  pavucontrol \
+  openssh \
+  acpi \
+  acpi_call \
+  acpid \
+  ntfs-3g \
+  which \
+  xdg-user-dirs \
+  xdg-utils
 
 # Disable if not using a nvidia cards
 # Disabled by default during tests in VMs
@@ -103,6 +155,17 @@ grub-mkconfig -o /boot/grub/grub.cfg
 # Enabled by default during tests in VMs
 pacman -S --noconfirm --needed virtualbox-guest-utils
 systelctm enable vboxservice.service
+
+# }}}
+
+# Enable the services {{{
+
+step "Enable the services"
+sudo systemctl enable NetworkManager
+sudo systemctl enable cups
+sudo systemctl enable sshd
+sudo systemctl enable reflector.timer
+sudo systemctl enable acpid
 
 # }}}
 
