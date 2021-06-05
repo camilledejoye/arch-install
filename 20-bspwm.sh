@@ -132,7 +132,7 @@ systemctl --user enable ssh-agent.service
 # Deploy base16 themes {{{
 
 ## Install my fork of base16-manager
-git clone git@github.com:base16-manager /tmp/base16-manager
+git clone https://github.com/camilledejoye/base16-manager /tmp/base16-manager
 cd /tmp/base16-manager
 sudo make install
 
