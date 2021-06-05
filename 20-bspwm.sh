@@ -131,22 +131,25 @@ systemctl --user enable ssh-agent.service
 
 # Deploy base16 themes {{{
 
-## Install my fork of base16-manager
-git clone https://github.com/camilledejoye/base16-manager /tmp/base16-manager
-cd /tmp/base16-manager
-sudo make install
+if ! command -v base16-manager >/dev/null 2>&1; then
 
-## Install the themes needed
-base16-manager install theova/base16-qutebrowser
-base16-manager install nicodebo/base16-fzf
-base16-manager install khamer/base16-dunst
-base16-manager install chriskempson/base16-xresources
-base16-manager install chriskempson/base16-vim
-# Not sure yet for rofi because I think my theme is based on the colors but not the look
-# base16-manager install 0xdec/base16-rofi
+  ## Install my fork of base16-manager
+  git clone https://github.com/camilledejoye/base16-manager /tmp/base16-manager
+  cd /tmp/base16-manager
+  sudo make install
 
-## Setup the theme
-base16-manager set tomorrow-night
+  ## Install the themes needed
+  base16-manager install theova/base16-qutebrowser
+  base16-manager install nicodebo/base16-fzf
+  base16-manager install khamer/base16-dunst
+  base16-manager install chriskempson/base16-xresources
+  base16-manager install chriskempson/base16-vim
+  # Not sure yet for rofi because I think my theme is based on the colors but not the look
+  # base16-manager install 0xdec/base16-rofi
+
+  ## Setup the theme
+  base16-manager set tomorrow-night
+fi
 
 # }}}
 
