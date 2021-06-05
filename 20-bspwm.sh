@@ -152,9 +152,11 @@ base16-manager set tomorrow-night
 
 # Setup the password store {{{
 
-step "Setup the password store"
-yay -S --noconfirm --needed pass
-git clone git@github.com:camilledejoye/password-store "$HOME/.password-store"
+if [ ! -d "$HOME/.password-store" ]; then
+  step "Setup the password store"
+  yay -S --noconfirm --needed pass
+  git clone git@github.com:camilledejoye/password-store "$HOME/.password-store"
+fi
 
 # }}}
 
