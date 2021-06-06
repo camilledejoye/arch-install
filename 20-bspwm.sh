@@ -131,6 +131,8 @@ if [ ! -d "$HOME/.dotfiles" ]; then
   git -C "$HOME/.dotfiles" remote set-url origin git@github.com:camilledejoye/dotfiles
 
   step "Deploying the dotfiles..."
+  # First deploy the rcm config file to properly deploy the rest of them
+  rcup rcrc
   # Force the deployement since it's a fresh install
   rcup -f
 else
