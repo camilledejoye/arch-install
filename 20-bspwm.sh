@@ -71,13 +71,13 @@ yay -S --noconfirm --needed \
   ttf-dejavu \
   ttf-droid \
   ttf-hack \
-  nerd-fonts-hack \
   ttf-font-awesome \
   ttf-ms-fonts \
   ttf-roboto \
   ttf-ubuntu-font-family \
   noto-fonts \
-  terminus-font
+  terminus-font \
+  ttf-nerd-fonts-symbols
 
 # }}}
 
