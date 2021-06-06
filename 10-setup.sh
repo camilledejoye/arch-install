@@ -118,7 +118,6 @@ fi
 
 step "Update pacman configuration"
 sudo sed -i -e 's/^#\(Color\)$/\1/' \
-  -e 's/^#\(TotalDownload\)$/\1/' \
   -e 's/^#\(VerbosePkgLists\)$/\1/' \
   -e 's/^# Misc options$/\0\nILoveCandy/' \
   /etc/pacman.conf
