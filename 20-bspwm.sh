@@ -46,7 +46,8 @@ yay -S --noconfirm --needed \
   udiskie \
   dex \
   pcmanfm \
-  qutebrowser
+  qutebrowser \
+  qtwebflix-git
 
 ## Install separately because it requires dmenu and this will conflict with rofi-dmenu
 ## This way rofi-dmenu will validate the requirements without conflicts
