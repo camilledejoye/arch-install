@@ -19,6 +19,7 @@ yay -S --noconfirm --needed \
   xorg \
   lightdm \
   lightdm-gtk-greeter \
+  numlockx \
   xss-lock \
   sflock-git \
   polkit-gnome-gtk2 \
@@ -95,6 +96,8 @@ sudo sed -i \
   -e 's/^#\(clock-format\)=$/\1=%A %d %H:%M/' \
   -e 's/^#\(font-name\)=$/\1=Noto Sans/' \
   /etc/lightdm/lightdm-gtk-greeter.conf
+
+sudo sed -i -e 's~^#\(greeter-setup-script\)=$~\1=/usr/bin/numlockx on~' /etc/lightdm/lightdm.conf
 
 add-line-to-file "cursor-theme-name=Bibata-Modern-Ice" "/etc/lightdm/lightdm-gtk-greeter.conf"
 
