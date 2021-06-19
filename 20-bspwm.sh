@@ -188,7 +188,7 @@ step "Configure NeoVim"
 ln -s "$HOME/.config/nvim/pack/packager/start/phpactor/bin/phpactor" "$HOME/.local/bin/phpactor"
 
 ## Needed for CoC & some providers
-yay -S --noconfirm --needed nodejs python-pynvim composer yarn
+yay -S --noconfirm --needed nodejs python-pynvim composer yarn php
 
 ## Needed for Node.js provider
 yarn global add neovim
