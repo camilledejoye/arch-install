@@ -29,7 +29,7 @@ yay -S --noconfirm --needed \
   polybar \
   pa-applet-git \
   dunst \
-  vlc \
+  vlc libdvdnav libdvdread libdvdaudio libdvdcss \
   alacritty \
   rofi \
   rofi-dmenu \
