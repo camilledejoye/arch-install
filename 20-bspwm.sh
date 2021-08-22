@@ -24,7 +24,7 @@ yay -S --noconfirm --needed \
   sflock-git \
   polkit-gnome-gtk2 \
   gnome-ssh-askpass2 \
-  bspwm \
+  bspwm wmname \
   sxhkd \
   polybar \
   pa-applet-git \
