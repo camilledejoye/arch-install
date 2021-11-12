@@ -79,7 +79,8 @@ yay -S --noconfirm --needed \
   ttf-ubuntu-font-family \
   noto-fonts \
   terminus-font \
-  ttf-nerd-fonts-symbols
+  ttf-nerd-fonts-symbols \
+  ttf-joypixels
 
 # }}}
 
