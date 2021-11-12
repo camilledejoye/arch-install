@@ -46,7 +46,7 @@ yay -S --noconfirm --needed \
   udiskie \
   dex \
   pcmanfm \
-  qutebrowser \
+  qutebrowser python-tldextract \
   qtwebflix-git
 
 ## Install separately because it requires dmenu and this will conflict with rofi-dmenu
