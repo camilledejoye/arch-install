@@ -14,6 +14,12 @@ step "Install packages"
 
 ## General packages {{{
 
+# TODO add a dedicated file/step to install packages which are not linked to the window
+# manager:
+# install.sh => Strict minimum to boot
+# setup.sh => Setup the environment (INCLDE HERE ?)
+# bspwm.sh => Specific setup for bspwm
+
 yay -S --noconfirm --needed \
   xf86-video-intel \
   xorg \
@@ -47,7 +53,8 @@ yay -S --noconfirm --needed \
   dex \
   pcmanfm \
   qutebrowser python-tldextract \
-  qtwebflix-git
+  qtwebflix-git \
+  mpd mpc vimpc
 
 ## Install separately because it requires dmenu and this will conflict with rofi-dmenu
 ## This way rofi-dmenu will validate the requirements without conflicts
