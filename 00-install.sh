@@ -71,6 +71,7 @@ if [ ! -f /etc/localtime ]; then
   ## Setup the locales
   echo "LANG=fr_FR.UTF-8" >> /etc/locale.conf
   echo "LC_MESSAGES=en_US.UTF-8" >> /etc/locale.conf
+  echo "LC_TIME=en_US.UTF-8" >> /etc/locale.conf
 
   ## Keyboard layout for TTYs
   echo "KEYMAP=fr-latin1" > /etc/vconsole.conf
