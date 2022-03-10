@@ -88,7 +88,7 @@ if [ ! -z "${github_token:-}" ]; then
     --silent --output /dev/null \
     --data-binary @-  <<EOF
 {
-  "title":"$(hostname) - test",
+  "title":"$(hostname) - arch install",
   "key":"$(cat /home/cdejoye/.ssh/id_ed25519.pub)"
 }
 EOF

@@ -38,7 +38,7 @@ And more details about how to [choose between MBR and GPT](https://wiki.archlinu
 
 The usual organization looks like:
 
-| Mount point | Partition | Partition type                                               | gdisk's code     | Recommended size |
+| Mount point  | Partition | Partition type                                               | gdisk's code     | Recommended size |
 |--------------|-----------|--------------------------------------------------------------|------------------|------------------|
 | /boot/efi    | /dev/sdX1 | `C12A7328-F81F-11D2-BA4B-00A0C93EC93B` EFI system partition  | ef00             | At least 260 MiB |
 | /            | /dev/sdX2 | `4F68BCE3-E8CD-4DB1-96E7-FBCAF984B709` Linux x86-64 root (/) | 8304             | 23 GiB - 32 GiB  |

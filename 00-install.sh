@@ -38,7 +38,7 @@ passwd; echo
 
 # Create the main user {{{
 
-step "Create the user ${blue}$use${end}"
+step "Create the user ${blue}$user${end}"
 if id "$user" >/dev/null 2>&1; then
   echo -e "The user already exists."
 else
@@ -149,13 +149,11 @@ sudo pacman -S --noconfirm --needed \
   xdg-utils
 
 # Disable if not using a nvidia cards
-# Disabled by default during tests in VMs
-# pacman -S --noconfirm --needed nvidia nvidia-utils nvidia-settings
+pacman -S --noconfirm --needed nvidia nvidia-utils nvidia-settings
 
 # Enable if in a virtualbox VM
-# Enabled by default during tests in VMs
-pacman -S --noconfirm --needed virtualbox-guest-utils
-systemctl enable vboxservice.service
+# pacman -S --noconfirm --needed virtualbox-guest-utils
+# systemctl enable vboxservice.service
 
 # }}}
 
