@@ -138,7 +138,6 @@ if [ ! -d "$HOME/.dotfiles" ]; then
     --recurse-submodules=zsh/oh-my-zsh/plugins/zsh-autosuggestions \
     --recurse-submodules=zsh/oh-my-zsh/plugins/zsh-syntax-highlighting \
     --recurse-submodules=zsh/oh-my-zsh/plugins/zsh-vim-mode \
-    --recurse-submodules=config/nvim/pack/packager/opt/vim-packager \
     "$HOME/.dotfiles"
 
   git -C "$HOME/.dotfiles" remote set-url origin git@github.com:camilledejoye/dotfiles
@@ -179,7 +178,6 @@ if ! command -v base16-manager >/dev/null 2>&1; then
   base16-manager install nicodebo/base16-fzf
   base16-manager install khamer/base16-dunst
   base16-manager install chriskempson/base16-xresources
-  base16-manager install chriskempson/base16-vim
   # Not sure yet for rofi because I think my theme is based on the colors but not the look
   # base16-manager install 0xdec/base16-rofi
 
