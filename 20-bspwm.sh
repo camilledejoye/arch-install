@@ -52,7 +52,7 @@ yay -S --noconfirm --needed \
   udiskie \
   dex \
   pcmanfm \
-  qutebrowser python-tldextract \
+  qutebrowser python-tldextract pdfjs \
   qtwebflix-git \
   mpd mpc vimpc
 
