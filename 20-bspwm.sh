@@ -54,6 +54,7 @@ yay -S --noconfirm --needed \
   pcmanfm \
   qutebrowser python-tldextract pdfjs \
   qtwebflix-git \
+  docker docker-compose docker-credential-pass ctop \
   mpd mpc vimpc
 
 ## Install separately because it requires dmenu and this will conflict with rofi-dmenu
