@@ -163,6 +163,7 @@ step "Enable the services"
 sudo systemctl enable NetworkManager
 sudo systemctl enable cups
 sudo systemctl enable sshd
+sudo systemctl enable reflector.service
 sudo systemctl enable reflector.timer
 sudo systemctl enable acpid
 
