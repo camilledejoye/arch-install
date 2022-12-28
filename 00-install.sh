@@ -166,6 +166,8 @@ sudo systemctl enable sshd
 sudo systemctl enable reflector.service
 sudo systemctl enable reflector.timer
 sudo systemctl enable acpid
+sudo systemctl enable paccache.service
+sudo systemctl enable paccache.timer
 
 # }}}
 
