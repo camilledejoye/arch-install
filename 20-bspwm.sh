@@ -156,9 +156,10 @@ fi
 
 # Enable services {{{
 
-step "Enable lightdm & the SSH agent"
+step "Enable services"
 sudo systemctl enable lightdm
 systemctl --user enable ssh-agent.service
+systemctl --user enable clipmenud.service
 
 # }}}
 
