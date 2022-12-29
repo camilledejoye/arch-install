@@ -192,17 +192,17 @@ fi
 
 step "Configure NeoVim"
 
-## Add phpactor to the PATH
-ln -s "$HOME/.config/nvim/pack/packager/start/phpactor/bin/phpactor" "$HOME/.local/bin/phpactor"
-
-## Needed for CoC & some providers
-yay -S --noconfirm --needed nodejs python-pynvim composer yarn php
+## Needed for some providers
+yay -S --noconfirm --needed nodejs python-pynvim composer yarn php luarocks
 
 ## Needed for Node.js provider
 yarn global add neovim
 
 step "Installing packages..."
 nvim -c PackInstall -c qa >/dev/null 2>&1
+
+## Add phpactor to the PATH
+ln -s "$HOME/.config/nvim/pack/packager/start/phpactor/bin/phpactor" "$HOME/.local/bin/phpactor"
 
 # }}}
 
