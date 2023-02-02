@@ -39,6 +39,7 @@ yay -S --noconfirm --needed \
   alacritty \
   rofi \
   rofi-dmenu \
+  rofi-calc \
   feh \
   picom \
   arandr \
