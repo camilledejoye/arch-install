@@ -81,7 +81,7 @@ yay -S --noconfirm --needed \
 yay -S --noconfirm --needed \
   ttf-dejavu \
   ttf-droid \
-  ttf-hack \
+  ttf-hack-nerd \
   ttf-font-awesome \
   ttf-ms-fonts \
   ttf-roboto \
