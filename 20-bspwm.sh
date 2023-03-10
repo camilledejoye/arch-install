@@ -56,7 +56,8 @@ yay -S --noconfirm --needed \
   qutebrowser python-tldextract pdfjs \
   qtwebflix-git \
   docker docker-compose docker-credential-pass ctop \
-  mpd mpc vimpc
+  mpd mpc vimpc \
+  samba avahi nss-mdns
 
 ## Install separately because it requires dmenu and this will conflict with rofi-dmenu
 ## This way rofi-dmenu will validate the requirements without conflicts
@@ -154,6 +155,21 @@ else
 fi
 
 ## }}}
+
+# Configure Samba sharing {{{
+
+step "Configure Samba"
+
+if [ ! -d "$HOME/.dotfiles" ]; then
+  sudo cp ~/.dotfiles/etc/nsswitch.conf /etc/nsswitch.conf
+  sudo cp ~/.dotfiles/etc/samba/smb.conf /etc/samba/smb.conf
+  sudo systemctl enable smb.service avahi-daemon.service
+else
+  echo -e "${bold}${red}~/.dotfiles does not exists${end}"
+  echo "Skipping Samba configuration"
+fi
+
+# }}}
 
 # Enable services {{{
 
